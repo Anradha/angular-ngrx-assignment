@@ -1,0 +1,33 @@
+<div class="form-center">
+  <h1>Log In To Your Account</h1>
+  <div *ngIf="errorMessage">
+    <div class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+  </div>
+  <form>
+    <div class="form-group">
+      <input
+        class="form-control"
+        id="username"
+        name="username"
+        placeholder="User Name"
+        [(ngModel)]="user.username"
+        required/>
+
+      <input
+        class="form-control"
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="user.password"
+        required/>
+
+      <button
+        class="btn btn-default"
+        (click)="onLogin()"> SIGN IN </button>
+    </div>
+  </form>
+  Don't have an account? <a [routerLink]="['/createAccount']">Create A New Account!</a>
+</div>

@@ -1,0 +1,55 @@
+<div class="form-center">
+  <h1>Create New Account</h1>
+  <p> Already have an account? <a [routerLink]="['/login']">Sign In</a></p>
+  <div *ngIf="errorMessage">
+    <div class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+  </div>
+  <form>
+    <div class="form-group">
+      <input
+        class="form-control"
+        id="username"
+        name="username"
+        placeholder="User Name"
+        [(ngModel)]="user.username"
+        required/>
+
+      <input
+        class="form-control"
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="user.password"
+        required/>
+
+      <input
+        class="form-control"
+        id="confirmPassword"
+        type="password"
+        placeholder="Confirm Password"
+        required/>
+
+      <button
+        class="btn btn-default"
+        (click)="addAccount()"> CREATE ACCOUNT </button>
+    </div>
+  </form>
+
+  <p> By signing up, you agree to our <a>Term of Services</a> and <a> Privacy Policy </a></p>
+</div>
+
+<ng-template #accountCreated>
+  <div class="form-center">
+    <h1>Account Created</h1>
+    <p>You have taken the first step to something great! You can either keep on going and set up your profile now, or log out and come back to it later</p>
+    <button
+      class="btn btn-default"
+      (click)="onLogout()"> LOGOUT </button>
+    <button
+      class="btn btn-default"
+      (click)="setUpProfile()"> SET UP PROFILE </button>
+  </div>
+</ng-template>
