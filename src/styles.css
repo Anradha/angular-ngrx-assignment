@@ -9,3 +9,12 @@ body {
   align-items: center;
   justify-content: center;
 }
+.alert {
+  padding: 5px;
+}
+.btn {
+  margin-right: 10px;
+}
+.form-center {
+  text-align: center;
+}

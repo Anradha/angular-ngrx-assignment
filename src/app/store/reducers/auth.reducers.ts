@@ -54,13 +54,18 @@ export function reducer(state = initialState, action: All): State {
     case AuthActionTypes.SIGNUP_FAILURE: {
       return {
         ...state,
-        errorMessage: 'That email is already in use.'
+        errorMessage: 'This user name is already in use.'
       };
     }
 
     case AuthActionTypes.LOGOUT: {
       return initialState;
     }
+
+    case AuthActionTypes.RESET: {
+      return initialState;
+    }
+
     default:
       return state;
   }

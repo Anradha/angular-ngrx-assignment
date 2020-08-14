@@ -6,50 +6,48 @@
       {{errorMessage}}
     </div>
   </div>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="addAccount()">
     <div class="form-group">
       <input
         class="form-control"
-        id="username"
-        name="username"
         placeholder="User Name"
-        [(ngModel)]="user.username"
+        id="username"
+        formControlName="username"
         required/>
+      <div *ngIf="f.username.touched && f.username.invalid" class="alert alert-danger">
+        <div *ngIf="f.username.errors.required"> User Name is required. </div>
+      </div>
 
       <input
         class="form-control"
-        id="password"
-        name="password"
-        type="password"
         placeholder="Password"
-        [(ngModel)]="user.password"
+        id="password"
+        type="password"
+        formControlName="password"
         required/>
+
+      <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+        <ng-container *ngIf="f.password.errors.required"> Password is required. </ng-container>
+        <ng-container *ngIf="f.password.errors.PasswordValidators"> Password should be 8 characters long, contain one capital, contain one numeral and contain one special character. </ng-container>
+      </div>
 
       <input
         class="form-control"
+        placeholder="Confirm Password"
         id="confirmPassword"
         type="password"
-        placeholder="Confirm Password"
+        formControlName="confirmPassword"
         required/>
 
+      <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="alert alert-danger">
+        <ng-container *ngIf="f.confirmPassword.errors.required"> Confirm Password is required. </ng-container>
+        <ng-container *ngIf="f.confirmPassword.errors.ConfirmedPasswordValidators"> Password and Confirm Password must be match. </ng-container>
+      </div>
+
       <button
-        class="btn btn-default"
-        (click)="addAccount()"> CREATE ACCOUNT </button>
+        class="btn btn-default" [disabled]="!form.valid"> CREATE ACCOUNT </button>
     </div>
   </form>
 
   <p> By signing up, you agree to our <a>Term of Services</a> and <a> Privacy Policy </a></p>
 </div>
-
-<ng-template #accountCreated>
-  <div class="form-center">
-    <h1>Account Created</h1>
-    <p>You have taken the first step to something great! You can either keep on going and set up your profile now, or log out and come back to it later</p>
-    <button
-      class="btn btn-default"
-      (click)="onLogout()"> LOGOUT </button>
-    <button
-      class="btn btn-default"
-      (click)="setUpProfile()"> SET UP PROFILE </button>
-  </div>
-</ng-template>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
@@ -14,24 +14,31 @@ import { AuthService } from './services/auth.service';
 import { AuthEffects } from './store/effects/auth.effects';
 import { reducers } from './store/app.states';
 import { LandingComponent } from './landing/landing.component';
+import { AccountCreateLandingComponent } from './account-create-landing/account-create-landing.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountCreateComponent,
     LoginComponent,
-    LandingComponent
+    LandingComponent,
+    AccountCreateLandingComponent,
+    ProfileComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthEffects]),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
-      { path: 'createAccount', component: AccountCreateComponent },
+      { path: 'account/create', component: AccountCreateComponent },
+      { path: 'account/create/landing', component: AccountCreateLandingComponent },
+      { path: 'profile/set', component: ProfileComponent },
       { path: '', component: LandingComponent },
       { path: '**', component: LoginComponent }
     ])

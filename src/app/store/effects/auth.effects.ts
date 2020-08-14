@@ -7,6 +7,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { AuthActionTypes, LogInSuccess, LogIn, LogInFailure, SignUp, SignUpSuccess, SignUpFailure } from '../actions/auth.actions';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Injectable()
 export class AuthEffects {
@@ -53,26 +54,26 @@ export class AuthEffects {
   @Effect()
   SignUp$: Observable<any> = this.actions$.pipe(
     ofType(AuthActionTypes.SIGNUP),
-    map((action: SignUp) => action.payload),
-    switchMap(payload => {
-      let isUserExists = false;
-      this.authService.getUserByName(payload.username).pipe(
-        map((user) => {
-          isUserExists = user.length > 0;
+    switchMap((action: SignUp) => {
+      return this.authService.getUserByName(action.payload.username).pipe (
+        switchMap((user: any) => {
+          if (!user || user.length === 0) {
+            return this.authService.signUp(action.payload.username, action.payload.password).pipe(
+              map((signupUser) => {
+                return new SignUpSuccess({token: signupUser.token, email: action.payload.email});
+              }),
+              catchError((error) => {
+                return of(new SignUpFailure({error}));
+              })
+            );
+          } else {
+            return of(new SignUpFailure({errormessage: 'User already exists.'}));
+          }
+        }),
+        catchError((error) => {
+          return of(new SignUpFailure({error}));
         })
       );
-      if (!isUserExists) {
-        return this.authService.signUp(payload.username, payload.password).pipe(
-          map((user) => {
-            return new SignUpSuccess({token: user.token, email: payload.email});
-          }),
-          catchError((error) => {
-            return of(new SignUpFailure({error}));
-          })
-        );
-      } else {
-        return of(new SignUpFailure({errormessage: 'User already exists.'}));
-      }
     })
   );
 
@@ -81,7 +82,7 @@ export class AuthEffects {
     ofType<SignUpSuccess>(AuthActionTypes.SIGNUP_SUCCESS),
     tap((action) => {
       localStorage.setItem('token', action.payload.token);
-      this.router.navigate(['/']);
+      this.router.navigate(['/account/create/landing']);
     })
   );
 

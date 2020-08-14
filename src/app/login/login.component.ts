@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { User } from '../models/user';
 import { AppState, selectAuthState } from '../store/app.states';
-import { LogIn } from '../store/actions/auth.actions';
+import { LogIn, Logout, Reset } from '../store/actions/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new Reset());
     this.getState.subscribe((state) => {
       this.errorMessage = state.errorMessage;
     });
