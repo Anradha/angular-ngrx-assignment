@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.states';
-import { Logout } from '../store/actions/auth.actions';
+import { AppState } from '../../store/app.states';
+import { Logout } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-landing',

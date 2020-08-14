@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { User } from '../models/user';
-import { AppState, selectAuthState } from '../store/app.states';
-import { LogIn, Logout, Reset } from '../store/actions/auth.actions';
+import { User } from '../../models/user';
+import { AppState, selectAuthState } from '../../store/app.states';
+import { LogIn, Logout, Reset } from '../../store/actions/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({

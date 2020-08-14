@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState, selectAuthState } from '../store/app.states';
-import { SignUp, Logout, Reset } from '../store/actions/auth.actions';
+import { AppState, selectAuthState } from '../../store/app.states';
+import { SignUp, Logout, Reset } from '../../store/actions/auth.actions';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ConfirmedPasswordValidators, PasswordValidators } from '../util/validators';
+import { ConfirmedPasswordValidators, PasswordValidators } from '../../util/validators';
 
 @Component({
   selector: 'app-account-create',

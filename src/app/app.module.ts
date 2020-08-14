@@ -8,14 +8,14 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountCreateComponent } from './account-create/account-create.component';
-import { LoginComponent } from './login/login.component';
+import { AccountCreateComponent } from './component/account-create/account-create.component';
+import { LoginComponent } from './component/login/login.component';
 import { AuthService } from './services/auth.service';
 import { AuthEffects } from './store/effects/auth.effects';
 import { reducers } from './store/app.states';
-import { LandingComponent } from './landing/landing.component';
-import { AccountCreateLandingComponent } from './account-create-landing/account-create-landing.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LandingComponent } from './component/landing/landing.component';
+import { AccountCreateLandingComponent } from './component/account-create-landing/account-create-landing.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 @NgModule({
   declarations: [
