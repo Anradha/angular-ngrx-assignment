@@ -9,6 +9,13 @@ body {
   align-items: center;
   justify-content: center;
 }
+.form-center {
+  text-align: center;
+  width: 500px;
+}
+.form-control {
+  margin-bottom: 25px;
+}
 .alert {
   padding: 5px;
 }
@@ -18,18 +25,26 @@ body {
   padding: 12px 20px 12px 20px;
   font-weight: bold;
 }
+.btn {
+  margin-right: 10px;
+  font-size: 12px;
+  padding: 12px 20px 12px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  border-width: 1px;
+}
 .btn-blue, .btn-blue:hover {
   background-color: #69a9f2;
   color: white;
-  border-radius: 20px;
   border-color: white;
+}
+.btn-blue:disabled {
+  background-color: lightgrey;
 }
 .btn-white, .btn-white:hover {
   background-color: white;
   color: #69a9f2;
-  border-radius: 20px;
   border-color: #69a9f2;
-  border-width: 1px;
 }
 .form-center {
   text-align: center;
@@ -42,4 +57,19 @@ body {
   height: 50px;
   background-color: white;
   margin: auto;
+}
+option {
+  padding: 10px;
+}
+.blank-profile-picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: lightgray;
+  background: url(assets/blank-profile-picture.jpg);
+  background-repeat: no-repeat;
+  background-size: 200px 200px;
+  margin-left: 150px;
 }

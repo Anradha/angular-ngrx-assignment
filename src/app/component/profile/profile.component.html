@@ -1,1 +1,190 @@
-<p>profile works!</p>
+<div class="form-center">
+  <h1>Set Up Your Profile</h1>
+  <div style="display: flex; justify-content: center;">
+    <div [ngClass]="{'circle-blue':currentPage === 1,'done':currentPage !== 1}"> <span *ngIf="currentPage <= 1">1</span> </div>
+    <hr [ngClass]="{'between':currentPage === 1,'between-done':currentPage !== 1}" />
+    <div [ngClass]="{'circle-blue':currentPage === 2,'circle-dflt':currentPage < 2,'done':currentPage > 2}"> <span *ngIf="currentPage <= 2">2</span> </div>
+    <hr [ngClass]="{'between':currentPage <= 2,'between-done':currentPage > 2}" />
+    <div [ngClass]="{'circle-blue':currentPage === 3,'circle-dflt':currentPage < 3,'done':currentPage > 3}"> <span *ngIf="currentPage <= 3">3</span> </div>
+    <hr [ngClass]="{'between':currentPage <= 3,'between-done':currentPage > 3}" />
+    <div [ngClass]="{'circle-blue':currentPage === 4,'circle-dflt':currentPage !== 4}"> 4 </div>
+  </div>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="width: 25%;" [ngClass]="{'text-blue':currentPage === 1,'text-done':currentPage !== 1}"> Bio Details </div>
+    <div style="width: 25%;" [ngClass]="{'text-blue':currentPage === 2,'text-dflt':currentPage < 2,'text-done':currentPage > 2}"> Profile Picture </div>
+    <div style="width: 25%;" [ngClass]="{'text-blue':currentPage === 3,'text-dflt':currentPage < 3,'text-done':currentPage > 3}"> Address </div>
+    <div style="width: 25%;" [ngClass]="{'text-blue':currentPage === 4,'text-dflt':currentPage !== 4}"> Security </div>
+  </div>
+  <br><br><br>
+
+
+  <div *ngIf='currentPage === 1'>
+    <form [formGroup]="form1" (ngSubmit)="bioDetailsSubmit()">
+      <div class="form-group">
+        <input
+          class="form-control"
+          placeholder="First Name"
+          id="firstname"
+          formControlName="firstname"
+          required/>
+        <div *ngIf="f1.firstname.touched && f1.firstname.invalid" class="alert alert-danger">
+          <div *ngIf="f1.firstname.errors.required"> First Name is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="Last Name"
+          id="lastname"
+          formControlName="lastname"
+          required/>
+        <div *ngIf="f1.lastname.touched && f1.lastname.invalid" class="alert alert-danger">
+          <div *ngIf="f1.lastname.errors.required"> Last Name is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="Phone Number"
+          id="phonenumber"
+          formControlName="phonenumber"
+          required/>
+        <div *ngIf="f1.phonenumber.touched && f1.phonenumber.invalid" class="alert alert-danger">
+          <div *ngIf="f1.phonenumber.errors.required"> Phone number is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="Screen Name (Optional)"
+          id="screenname"
+          formControlName="screenname"/>
+
+        <button
+          class="btn btn-blue" [disabled]="!form1.valid"> NEXT </button>
+
+      </div>
+    </form>
+
+  </div>
+
+  <div *ngIf='currentPage === 2'>
+    <form [formGroup]="form2" (ngSubmit)="profilePictureSubmit()">
+      <div class="blank-profile-picture"></div>
+      <br>
+      <p style="color: lightgray">Click on the image above to upload your picture</p>
+      <br><br>
+      <button class="btn btn-blue" [disabled]="!form2.valid"> NEXT </button>
+    </form>
+  </div>
+
+  <div *ngIf='currentPage === 3'>
+    <form [formGroup]="form3" (ngSubmit)="addressSubmit()">
+      <div class="form-group">
+        <input
+          class="form-control"
+          placeholder="Address"
+          id="address"
+          formControlName="address"
+          required/>
+        <div *ngIf="f3.address.touched && f3.address.invalid" class="alert alert-danger">
+          <div *ngIf="f3.address.errors.required"> Address is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="Country"
+          id="country"
+          formControlName="country"
+          required/>
+        <div *ngIf="f3.country.touched && f3.country.invalid" class="alert alert-danger">
+          <div *ngIf="f3.country.errors.required"> Country is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="Zip Code"
+          id="zipcode"
+          formControlName="zipcode"
+          required/>
+        <div *ngIf="f3.zipcode.touched && f3.zipcode.invalid" class="alert alert-danger">
+          <div *ngIf="f3.zipcode.errors.required"> Zip Code is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="State"
+          id="state"
+          formControlName="state"
+          required/>
+        <div *ngIf="f3.state.touched && f3.state.invalid" class="alert alert-danger">
+          <div *ngIf="f3.state.errors.required"> State is required. </div>
+        </div>
+
+        <input
+          class="form-control"
+          placeholder="City"
+          id="city"
+          formControlName="city"
+          required/>
+        <div *ngIf="f3.city.touched && f3.city.invalid" class="alert alert-danger">
+          <div *ngIf="f3.city.errors.required"> City is required. </div>
+        </div>
+
+        <button
+          class="btn btn-blue" [disabled]="!form3.valid"> NEXT </button>
+
+      </div>
+    </form>
+
+  </div>
+
+  <div *ngIf='currentPage === 4'>
+    <form [formGroup]="form4" (ngSubmit)="securityQSubmit()">
+      <div class="form-group">
+        <div style='display: flex; justify-content: space-between;'>
+          <select style='margin-right: 10px;'
+            class="form-control"
+            placeholder="Select Security Question"
+            id="question1"
+            formControlName="question1"
+            required>
+            <option value="question1">Question 1</option>
+            <option value="question2">Question 2</option>
+            <option value="question2">Question 3</option>
+          </select>
+
+          <select
+            class="form-control"
+            placeholder="Select Security Question"
+            id="question2"
+            formControlName="question2"
+            required>
+            <option value="question1">Question 1</option>
+            <option value="question2">Question 2</option>
+            <option value="question2">Question 3</option>
+          </select>
+        </div>
+
+        <div style='display: flex; justify-content: space-between;'>
+
+          <input style='margin-right: 10px;'
+            class="form-control"
+            placeholder="Type Answer"
+            id="answer1"
+            formControlName="answer1"
+            required/>
+
+          <input
+            class="form-control"
+            placeholder="Type Answer"
+            id="answer2"
+            formControlName="answer2"
+            required/>
+        </div>
+
+        <button
+          class="btn btn-blue" [disabled]="!form4.valid"> NEXT </button>
+
+        </div>
+      </form>
+
+</div>

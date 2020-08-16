@@ -40,7 +40,7 @@ import { PasswordComponent } from './component/password/password.component';
       { path: 'login', component: LoginComponent },
       { path: 'account/create', component: AccountCreateComponent },
       { path: 'account/create/landing', component: AccountCreateLandingComponent },
-      { path: 'profile/set', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: 'password/forgot', component: PasswordComponent },
       { path: '', component: LandingComponent },
       { path: '**', component: LoginComponent }
