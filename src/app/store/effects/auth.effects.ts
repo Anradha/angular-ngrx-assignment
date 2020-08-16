@@ -7,7 +7,6 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { AuthActionTypes, LogInSuccess, LogIn, LogInFailure, SignUp, SignUpSuccess, SignUpFailure } from '../actions/auth.actions';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
 
 @Injectable()
 export class AuthEffects {

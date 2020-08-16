@@ -16,6 +16,7 @@ import { reducers } from './store/app.states';
 import { LandingComponent } from './component/landing/landing.component';
 import { AccountCreateLandingComponent } from './component/account-create-landing/account-create-landing.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import { PasswordComponent } from './component/password/password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './component/profile/profile.component';
     LoginComponent,
     LandingComponent,
     AccountCreateLandingComponent,
-    ProfileComponent
+    ProfileComponent,
+    PasswordComponent
   ],
   imports: [
     AppRoutingModule,
@@ -39,6 +41,7 @@ import { ProfileComponent } from './component/profile/profile.component';
       { path: 'account/create', component: AccountCreateComponent },
       { path: 'account/create/landing', component: AccountCreateLandingComponent },
       { path: 'profile/set', component: ProfileComponent },
+      { path: 'password/forgot', component: PasswordComponent },
       { path: '', component: LandingComponent },
       { path: '**', component: LoginComponent }
     ])

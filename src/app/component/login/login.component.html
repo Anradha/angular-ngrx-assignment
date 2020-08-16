@@ -24,8 +24,23 @@
         [(ngModel)]="user.password"
         required/>
 
+      <div style="display: flex;">
+        <div style="width: 50%; text-align: left;">
+          <input
+            id="rememberme"
+            name="rememberme"
+            type="radio"
+            placeholder="Remember Me"
+          /> Remember Me
+        </div>
+        <div style="width: 50%; text-align: right;">
+          <a [routerLink]="['/password/forgot']">Forgot Password?</a>
+        </div>
+
+      </div>
+      <br>
       <button
-        class="btn btn-default"
+        class="btn btn-blue"
         (click)="onLogin()"> SIGN IN </button>
     </div>
   </form>
