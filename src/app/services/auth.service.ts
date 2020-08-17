@@ -31,4 +31,9 @@ export class AuthService {
     const url = `${this.BASE_URL}/users`;
     return this.http.post<User>(url, {username, password, token: uuidv4()});
   }
+
+  updateUser(user: User): Observable<User> {
+    const url = `${this.BASE_URL}/users/${user.id}`;
+    return this.http.put<User>(url, user);
+  }
 }

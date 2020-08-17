@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState, selectAuthState } from '../../store/app.states';
-import { SignUp, Logout, Reset } from '../../store/actions/auth.actions';
+import { SignUp, Reset } from '../../store/actions/auth.actions';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmedPasswordValidators, PasswordValidators } from '../../util/validators';
@@ -20,7 +20,7 @@ export class AccountCreateComponent implements OnInit {
   constructor(private store: Store<AppState>,
               private formBuilder: FormBuilder) {
     this.form = formBuilder.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, PasswordValidators()]],
       confirmPassword: ['', [Validators.required]]
     }, {

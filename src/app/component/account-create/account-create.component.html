@@ -10,12 +10,13 @@
     <div class="form-group">
       <input
         class="form-control"
-        placeholder="User Name"
+        placeholder="Email"
         id="username"
         formControlName="username"
         required/>
       <div *ngIf="f.username.touched && f.username.invalid" class="alert alert-danger">
-        <div *ngIf="f.username.errors.required"> User Name is required. </div>
+        <div *ngIf="f.username.errors.required"> Email is required. </div>
+        <div *ngIf="f.username.errors.email"> Email format is not valid. </div>
       </div>
 
       <input
@@ -28,7 +29,7 @@
 
       <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
         <ng-container *ngIf="f.password.errors.required"> Password is required. </ng-container>
-        <ng-container *ngIf="f.password.errors.PasswordValidators"> Password should be 8 characters long, contain one capital, contain one numeral and contain one special character. </ng-container>
+        <ng-container *ngIf="f.password.errors.PasswordValidators"> Password should be 8 characters long, should contain one capital, one numeral and one special character. </ng-container>
       </div>
 
       <input

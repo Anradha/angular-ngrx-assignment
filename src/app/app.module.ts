@@ -17,6 +17,7 @@ import { LandingComponent } from './component/landing/landing.component';
 import { AccountCreateLandingComponent } from './component/account-create-landing/account-create-landing.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { PasswordComponent } from './component/password/password.component';
+import { ProfileLandingComponent } from './component/profile-landing/profile-landing.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PasswordComponent } from './component/password/password.component';
     LandingComponent,
     AccountCreateLandingComponent,
     ProfileComponent,
-    PasswordComponent
+    PasswordComponent,
+    ProfileLandingComponent
   ],
   imports: [
     AppRoutingModule,
@@ -40,7 +42,8 @@ import { PasswordComponent } from './component/password/password.component';
       { path: 'login', component: LoginComponent },
       { path: 'account/create', component: AccountCreateComponent },
       { path: 'account/create/landing', component: AccountCreateLandingComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile/setup', component: ProfileComponent },
+      { path: 'profile/setup/landing', component: ProfileLandingComponent },
       { path: 'password/forgot', component: PasswordComponent },
       { path: '', component: LandingComponent },
       { path: '**', component: LoginComponent }

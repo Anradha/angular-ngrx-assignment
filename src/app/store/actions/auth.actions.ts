@@ -7,6 +7,9 @@ export enum AuthActionTypes {
   SIGNUP = '[Auth] Signup',
   SIGNUP_SUCCESS = '[Auth] Signup Success',
   SIGNUP_FAILURE = '[Auth] Signup Failure',
+  PROFILE_SETUP = '[Auth] Profile Setup',
+  PROFILE_SETUP_SUCCESS = '[Auth] Profile Setup Success',
+  PROFILE_SETUP_FAILURE = '[Auth] Profile Setup Failure',
   LOGOUT = '[Auth] Logout',
   RESET = '[Auth] Reset'
 }
@@ -49,6 +52,21 @@ export class Reset implements Action {
   readonly type = AuthActionTypes.RESET;
 }
 
+export class ProfileSetup implements Action {
+  readonly type = AuthActionTypes.PROFILE_SETUP;
+  constructor(public payload: any) {}
+}
+
+export class ProfileSetupSuccess implements Action {
+  readonly type = AuthActionTypes.PROFILE_SETUP_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class ProfileSetupFailure implements Action {
+  readonly type = AuthActionTypes.PROFILE_SETUP_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type All =
   | LogIn
   | LogInSuccess
@@ -57,4 +75,7 @@ export type All =
   | SignUpSuccess
   | SignUpFailure
   | Logout
-  | Reset;
+  | Reset
+  | ProfileSetup
+  | ProfileSetupSuccess
+  | ProfileSetupFailure;

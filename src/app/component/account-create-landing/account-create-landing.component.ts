@@ -27,7 +27,7 @@ export class AccountCreateLandingComponent implements OnInit {
   }
 
   setUpProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/profile/setup']);
   }
 
 }

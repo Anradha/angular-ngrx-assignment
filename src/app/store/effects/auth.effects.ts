@@ -5,8 +5,20 @@ import { Actions, Effect, ofType} from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { AuthActionTypes, LogInSuccess, LogIn, LogInFailure, SignUp, SignUpSuccess, SignUpFailure } from '../actions/auth.actions';
+import {
+  AuthActionTypes,
+  LogInSuccess,
+  LogIn,
+  LogInFailure,
+  SignUp,
+  SignUpSuccess,
+  SignUpFailure,
+  ProfileSetup,
+  ProfileSetupFailure,
+  ProfileSetupSuccess,
+} from '../actions/auth.actions';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Injectable()
 export class AuthEffects {
@@ -26,11 +38,11 @@ export class AuthEffects {
           if (user.length > 0) {
             return new LogInSuccess({token: user[0].token, email: action.payload.username});
           }else {
-            return new LogInFailure({error: 'Invalid credentials'});
+            return new LogInFailure({errormessage: 'Invalid credentials'});
           }
         }),
         catchError((error) => {
-          return of(new LogInFailure({error}));
+          return of(new LogInFailure({errormessage: JSON.stringify(error)}));
         })
       );
     })
@@ -62,7 +74,7 @@ export class AuthEffects {
                 return new SignUpSuccess({token: signupUser.token, email: action.payload.email});
               }),
               catchError((error) => {
-                return of(new SignUpFailure({error}));
+                return of(new SignUpFailure({errormessage: JSON.stringify(error)}));
               })
             );
           } else {
@@ -70,7 +82,7 @@ export class AuthEffects {
           }
         }),
         catchError((error) => {
-          return of(new SignUpFailure({error}));
+          return of(new SignUpFailure({errormessage: JSON.stringify(error)}));
         })
       );
     })
@@ -88,6 +100,47 @@ export class AuthEffects {
   @Effect({dispatch: false})
   SignUpFailuer$: Observable<any> = this.actions$.pipe(
     ofType(AuthActionTypes.SIGNUP_FAILURE)
+  );
+
+  @Effect()
+  ProfileSetup$: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.PROFILE_SETUP),
+    switchMap((action: ProfileSetup) => {
+      return this.authService.getUserByToken(localStorage.getItem('token')).pipe (
+        switchMap((user: User[]) => {
+          if (user.length === 1) {
+            const userToUpdate: User = user[0];
+            userToUpdate.profile = action.payload;
+            return this.authService.updateUser(userToUpdate).pipe(
+              map((updatedUser) => {
+                return new ProfileSetupSuccess(user);
+              }),
+              catchError((error) => {
+                return of(new ProfileSetupFailure({errormessage: JSON.stringify(error)}));
+              })
+            );
+          } else {
+            return of(new ProfileSetupFailure({errormessage: 'User does not exist.'}));
+          }
+        }),
+        catchError((error) => {
+          return of(new SignUpFailure({error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  ProfileSetupSuccess$: Observable<any> = this.actions$.pipe(
+    ofType<SignUpSuccess>(AuthActionTypes.PROFILE_SETUP_SUCCESS),
+    tap((action) => {
+      this.router.navigate(['/profile/setup/landing']);
+    })
+  );
+
+  @Effect({dispatch: false})
+  ProfileSetupFailure$: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.PROFILE_SETUP_FAILURE)
   );
 
   @Effect({dispatch: false})

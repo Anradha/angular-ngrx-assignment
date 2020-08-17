@@ -3,7 +3,7 @@ export class Profile {
   lastname: string;
   phonenumber: string;
   screenname?: string;
-  profilePic: string;
+  profilePic?: string;
   address: string;
   country: string;
   zipcode: string;
