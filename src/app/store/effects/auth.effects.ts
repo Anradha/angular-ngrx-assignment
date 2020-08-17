@@ -16,6 +16,9 @@ import {
   ProfileSetup,
   ProfileSetupFailure,
   ProfileSetupSuccess,
+  GetUserDetail,
+  UserDetail,
+  UserNotFound,
 } from '../actions/auth.actions';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
@@ -149,6 +152,26 @@ export class AuthEffects {
     tap((action) => {
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
+    })
+  );
+
+  @Effect()
+  GetUserDetail$: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.GET_USER_DETAIL),
+    switchMap((action: GetUserDetail) => {
+      return this.authService.getUserByToken(action.payload.token)
+      .pipe (
+        map((users: User[]) => {
+          if (users.length > 0) {
+            return new UserDetail({user: users[0]});
+          }else {
+            return new UserNotFound({errormessage: 'User not found.'});
+          }
+        }),
+        catchError((error) => {
+          return of(new UserNotFound({errormessage: JSON.stringify(error)}));
+        })
+      );
     })
   );
 

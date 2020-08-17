@@ -82,6 +82,20 @@ export function reducer(state = initialState, action: All): State {
       return initialState;
     }
 
+    case AuthActionTypes.USER_DETAIL: {
+      return {
+        ...state,
+        user: action.payload.user
+      };
+    }
+
+    case AuthActionTypes.USER_NOT_FOUND: {
+      return {
+        ...state,
+        errorMessage: action.payload.errormessage
+      };
+    }
+
     default:
       return state;
   }
